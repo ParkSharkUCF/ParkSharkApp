@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, AsyncStorage} from 'react-native';
 import Letter from '../components/Garage/Letter';
 
 export default class Main extends Component{
     static navigationOptions = {
         title: 'Main',
     };
+
+    saveData(){
+        let obj = {
+            email: 'admin@admin.com',
+            password: 'admin'
+        };
+        AsyncStorage.setItem('user', JSON.stringify(obj));
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -48,7 +57,7 @@ export default class Main extends Component{
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.admin}
-                        onPress={() => this.props.navigation.navigate('Login')}
+                        onPress={() => {this.saveData(); this.props.navigation.navigate('Login');}}
                         >
                         <Text style={styles.admin}>Admin Login</Text>
                     </TouchableOpacity>
