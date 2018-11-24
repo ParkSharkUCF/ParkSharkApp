@@ -15,7 +15,7 @@ class Admin extends Component{
                     <Button name="Add Garage"/>
                 </CardSection>
                 <CardSection>
-                    <Button name="Delete Garage"/>
+                    <Button name="Disable Garage"/>
                 </CardSection>
             </View>
         );

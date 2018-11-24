@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Text, ActivityIndicator, FlatList} from 'react-native';
-import SensorDetail from '../components/SensorDetail';
-import Header from '../components/Header';
-import Api from '../components/Api';
 
 class Garage extends Component{
+    static navigationOptions = {
+        title: 'Garage C',
+    };
 
     constructor(props){
         super(props);
@@ -42,13 +42,12 @@ class Garage extends Component{
             let sensors = this.state.dataSource.map((val, key) => {
                 return (
                     <View key={key} style={styles.buttonStyle}>
-                        <Text style={styles.apiText}>Floor {val.id} : {val.cars}/4</Text>
+                        <Text style={styles.apiText}>Spot {val.id} : {val.cars}/{val.spots.length}</Text>
                     </View>
                 );
             });
             return(
-                <View style={styles.container}>                   
-                    <Header name="Garage: X"/>                 
+                <View style={styles.container}>                                 
                     {sensors}
                 </View>
             );
@@ -62,6 +61,7 @@ export default Garage;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'lightskyblue'
     },
     item: {
         flex: 1,

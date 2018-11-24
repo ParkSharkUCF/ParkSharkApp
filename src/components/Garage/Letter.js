@@ -1,25 +1,36 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 
-class Letter extends Component{
-    // static navigationOptions = {
-    //     title: 'HOME',
-    // }
-    render(){
-        return(
-            <View style={styles.container}>
+// class Letter extends Component{
+//     // static navigationOptions = {
+//     //     title: 'HOME',
+//     // }
+//     render(){
+//         return(
+//             <View style={styles.container}>
+//                 <View style={styles.visual}>
+//                     <Image style={styles.image} source={this.props.imageUri}/>
+//                 </View>
+//                 <View style={styles.text}>
+//                     <Text>Percent full: %</Text>
+//                 </View>
+//             </View>
+//         );
+//     }
+// }
+
+const Letter = (props) => {
+    return (
+        <View style={styles.container}>
                 <View style={styles.visual}>
-                    <Image style={styles.image} source={this.props.imageUri}/>
+                    <Image style={styles.image} source={props.imageUri}/>
                 </View>
                 <View style={styles.text}>
-                    <Text>Percent full: %</Text>
+                    <Text>Spots left: {props.fraction}</Text>
                 </View>
             </View>
-        );
-    }
+    );
 }
-
-//<Text>{this.props.name}</Text>
 
 export default Letter;
 
@@ -30,7 +41,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 10,
         borderWidth: 1.5,
-        borderColor: 'red',
+        borderColor: 'black',
     },
     visual: {
         flex: 2,
