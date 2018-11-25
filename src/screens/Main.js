@@ -25,7 +25,7 @@ class Main extends Component{
                 this.setState({
                     garages: responseJson.garages,
                 })
-            }). then(() => {
+            }).then(() => {
                 fetch('https://murmuring-waters-47073.herokuapp.com/sensor')
                 .then((response) => response.json())
                 .then((responseJson) => {
@@ -57,7 +57,7 @@ class Main extends Component{
         return (0+"/"+0);
     }
 
-    saveData(){
+    savePass(){
         let obj = {
             email: 'admin@admin.com',
             password: 'admin'
@@ -65,53 +65,65 @@ class Main extends Component{
         AsyncStorage.setItem('user', JSON.stringify(obj));
     }
 
+    saveGarage  = (garageLet) => {
+        AsyncStorage.setItem('garageName', garageLet);
+        return;
+    }
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.garage}>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Garage')}
+                        onPress={() => {this.saveGarage("A"); this.props.navigation.navigate('Garage')}}
                         >
                         <Letter 
                             imageUri={require ('../images/Ap.png')}
                             fraction={this.getAvailability("A")}
                             />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {this.saveGarage("B"); this.props.navigation.navigate('Garage')}}
+                        >
                         <Letter 
                             imageUri={require ('../images/B.png')}
                             fraction={this.getAvailability("B")}
                             />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Garage')}
+                        onPress={() => {this.saveGarage("C"); this.props.navigation.navigate('Garage')}}
                         >
                         <Letter 
                             imageUri={require ('../images/C.png')}
                             fraction={this.getAvailability("C")}
                             />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {this.saveGarage("D"); this.props.navigation.navigate('Garage')}}
+                        >
                         <Letter 
                             imageUri={require ('../images/D.png')}
                             fraction={this.getAvailability("D")}
                             />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {this.saveGarage("E"); this.props.navigation.navigate('Garage')}}
+                        >
                         <Letter 
                             imageUri={require ('../images/E.png')}
                             fraction={this.getAvailability("E")}
                             />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {this.saveGarage("F"); this.props.navigation.navigate('Garage')}}
+                        >
                         <Letter 
                             imageUri={require ('../images/F.png')}
                             fraction={this.getAvailability("F")}
                             />
                     </TouchableOpacity>
                 </View>
-
-
+                
                 <View style={styles.info}>
                     <TouchableOpacity
                         style={styles.faq}
@@ -127,7 +139,7 @@ class Main extends Component{
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.admin}
-                        onPress={() => {this.saveData(); this.props.navigation.navigate('Login');}}
+                        onPress={() => {this.savePass(); this.props.navigation.navigate('Login');}}
                         >
                         <Text style={styles.admin}>Admin Login</Text>
                     </TouchableOpacity>

@@ -14,7 +14,7 @@ class Contacts extends Component{
                 <View style={styles.buttonStyle}>
                     <Text style={styles.name}>Travis Bangs</Text>
                     <Text style={styles.textStyle}>
-                        He's a computer Engineer that worked on the firmware.
+                        He's a computer Engineer that worked on the power system.
                         {"\n"}Contact Travis: tbangs89@gmail.com
                     </Text>
                 </View>
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     name:{
         fontWeight: '800',
         fontSize: 20,
+        marginLeft: 10
     },
     buttonStyle:{
         flex:1,
@@ -87,5 +88,6 @@ const styles = StyleSheet.create({
         fontWeight: '600', // boldness
         paddingTop: 10,
         paddingBottom: 10,
+        marginLeft: 5
     }
 });
