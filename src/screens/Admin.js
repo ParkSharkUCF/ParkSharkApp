@@ -17,10 +17,45 @@ class Admin extends Component{
             sensors: [],
             loading: false,
             totalSensors: 0,
+            dataSource: null,
+            lowBat: ["All is good"],
+            bateryLow: false
         }
     }
 
-    
+    componentDidMount(){
+
+        return fetch('https://murmuring-waters-47073.herokuapp.com/sensor')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    //isLoading: false,
+                    dataSource: responseJson.sensors,
+                })
+                //this.isBatteryLow();
+            })
+            .catch((error) => {
+                console.log(error)
+            }
+        );
+    }
+
+    isBatteryLow(){
+        
+        var index = 0;
+        for (var i = 0; i < this.state.dataSource.length; i++){
+            if (this.state.dataSource[i].batLevel == 1){
+                this.state.lowBat[index++] = this.state.dataSource[i].id;
+                this.setState({
+                    isBatteryLow: true
+                })
+            }
+        }
+
+        if (!this.state.bateryLow){
+            alert("All sensors are fine!");
+        }
+    }
 
     onButtonPressEnable(){
         this.setState({loading: true});
@@ -88,11 +123,50 @@ class Admin extends Component{
 
         if (title === "Disable Garage")
             return <Button whenPressed={this.onButtonPressDisable.bind(this)} name={title}/>
-        else
+        else if (title === "Enable Garage")
             return <Button whenPressed={this.onButtonPressEnable.bind(this)} name={title}/>
+        else 
+            return <Button whenPressed={this.isBatteryLow.bind(this)} name={title}/>
     }
 
     render(){
+        if (this.state.isBatteryLow){
+            return (
+                <View>
+                    <CardSection>
+                    {this.renderButton("Enable Garage")}
+                    </CardSection>
+                    <CardSection>
+                        {this.renderButton("Disable Garage")}
+                    </CardSection>
+                    <CardSection>
+                        <Input 
+                            placeholder="Garage Letter"
+                            label={"Garage"}
+                            value={this.state.name}
+                            onChangeText={name => this.setState({name})}                
+                            />
+                    </CardSection>
+                    <CardSection>
+                        <Input 
+                            placeholder="####"
+                            label={"Number of Sensors"}
+                            value={this.state.totalSensors}
+                            onChangeText={totalSensors => this.setState({totalSensors})}                
+                            />
+                    </CardSection>
+                    <CardSection>
+                        {this.renderButton("Check Batter Status")}
+                    </CardSection>
+                    <View>
+                        {this.state.lowBat.map((item, key) =>(
+                            <Text key={key} style={styles.TextStyle}>Sensor :{item} is low{"\n"}</Text>
+                        ))}
+                    </View>
+                </View>
+            );
+        }
+        else
         return(
             <View>
                 <CardSection>
@@ -116,6 +190,9 @@ class Admin extends Component{
                         value={this.state.totalSensors}
                         onChangeText={totalSensors => this.setState({totalSensors})}                
                         />
+                </CardSection>
+                <CardSection>
+                    {this.renderButton("Sensor Battery Status")}
                 </CardSection>
             </View>
         );
@@ -146,4 +223,17 @@ const styles = StyleSheet.create({
         lineHeight: 23,
         flex: 2
     },
+    TextStyle: {
+        fontSize: 20,
+        textAlign: 'center',
+    },
+    missingView: {
+        borderBottomWidth: 1,
+        padding: 5, // spaceing between content and border
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        borderColor: '#ddd',
+        position: 'relative',       
+    }
 });
