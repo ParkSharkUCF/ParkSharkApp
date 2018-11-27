@@ -68,6 +68,7 @@ export default class Login extends Component{
                         value={this.state.email}
                         onChangeText={email => this.setState({email})}
                         label="Email"
+                        keyboardType="email-address"
                     />
                 </CardSection>
 
@@ -75,7 +76,7 @@ export default class Login extends Component{
                     <Input 
                         secureTextEntry={true}
                         placeholder="password"
-                        value={this.state.text}
+                        value={this.state.password}
                         onChangeText={password => this.setState({password})}
                         label="Password"
                     />

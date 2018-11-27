@@ -29,7 +29,7 @@ class Contacts extends Component{
                     <Text style={styles.name}>Marcelino Galarza</Text>
                     <Text style={styles.textStyle}>
                         He's a Computer Engineer that worked on the mobile app.
-                        {"\n"}Contact Marcelino: marcelinogalarza8@gmail.com
+                        {"\n"}Contact Marcelino: mgalarza@gmail.com
                     </Text>
                 </View>
                 <View style={styles.buttonStyle}>

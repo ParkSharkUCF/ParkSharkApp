@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, AsyncStorage} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, AsyncStorage, ScrollView} from 'react-native';
 import Letter from '../components/Garage/Letter';
 import Header from '../components/Header';
 
 class Main extends Component{
     static navigationOptions = {
-        title: 'Main',
+        header: null,
     };
 
     // These fucking states will break your shit because render gets called no matter what
