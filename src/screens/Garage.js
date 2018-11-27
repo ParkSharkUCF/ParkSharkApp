@@ -90,7 +90,9 @@ class Garage extends Component{
             let sensors = this.state.dataSource.map((val, key) => {
                 return (
                     <View key={key} style={styles.buttonStyle}>
-                        <Text style={styles.apiText}>Spot {val.id} : {val.cars}/{val.spots.length}</Text>
+                        <Text style={styles.apiText}>Spot {val.id} : {val.cars}/{val.spots.length}
+                            {"\n"}Floor: {val.floor}
+                        </Text>
                     </View>
                 );
             });
