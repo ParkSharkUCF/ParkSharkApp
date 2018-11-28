@@ -19,7 +19,8 @@ class Admin extends Component{
             totalSensors: 0,
             dataSource: null,
             lowBat: ["All is good"],
-            bateryLow: false
+            bateryLow: false,
+            //enabled: 0
         }
     }
 
@@ -61,7 +62,7 @@ class Admin extends Component{
         this.setState({loading: true});
 
         for (var i = 0; i < this.state.totalSensors; i++){
-            this.state.sensors[i] = this.state.name+(i+1);
+            this.state.sensors[i] = (i+1)+this.state.name;
         }
 
             fetch(`https://murmuring-waters-47073.herokuapp.com/garage/${this.state.name}`,{
@@ -72,7 +73,8 @@ class Admin extends Component{
                 },
                 body: JSON.stringify({
                     sensors: this.state.sensors,
-                    totalSpots: this.state.totalSensors
+                    enabled: 1
+                    //totalSpots: this.state.totalSensors
                 })
             })
             .then((response) => response.json())
@@ -100,7 +102,8 @@ class Admin extends Component{
                 },
                 body: JSON.stringify({
                     sensors: [],
-                    totalSpots: 0
+                    enabled: 0
+                    //totalSpots: 0
                 })
             })
             .then((response) => response.json())

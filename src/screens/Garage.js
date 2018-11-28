@@ -15,6 +15,7 @@ class Garage extends Component{
             dataSource: [],
             garageLet: '',
             empty: true,
+            enabled: "1"
         }
     }
 
@@ -27,6 +28,12 @@ class Garage extends Component{
 
     isGarageEmpty(){
         //alert(this.state.dataSource.l);
+        if (this.state.enabled === "0"){
+            this.setState({
+                empty: true
+            })
+            return;
+        }
         for (var i = 0; i < this.state.dataSource.length; i++){
             if (this.state.dataSource[i].garage === this.state.garageLet){
                 this.setState({
@@ -41,10 +48,25 @@ class Garage extends Component{
     garageName = async () => {
         try {
           const value = await AsyncStorage.getItem('garageName');
+          //const t = await AsyncStorage.getItem('enabled');
           if (value !== null) {
             // We have data!!
             this.state.garageLet = value;
-            //alert(value);
+            //this.state.enabled = t;
+            //alert(t+" Did it work");
+          }
+         } catch (error) {
+           // Error retrieving data
+         }
+      }
+
+    garageEnabled = async () => {
+        try {
+          const value = await AsyncStorage.getItem('enabled');
+          if (value !== null) {
+            // We have data!!
+            this.state.enabled = value;
+            //alert("This is the value: " + value);
           }
          } catch (error) {
            // Error retrieving data
@@ -72,6 +94,7 @@ class Garage extends Component{
 
     render(){
         this.garageName();
+        this.garageEnabled();
         if (this.state.isLoading){
             return(
                 <View style={styles.container}>                  

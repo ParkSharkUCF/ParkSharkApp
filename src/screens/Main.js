@@ -40,8 +40,13 @@ class Main extends Component{
     }
 
     getAvailability = (name) => {
+
         for (var i = 0; i < this.state.garages.length; i++){
             if (name === this.state.garages[i].name){
+
+                if (this.state.garages[i].enabled == 0){
+                    return ("Disabled");
+                }
                 //alert("passed = " + name + " tested on = " + this.state.garages[i].name + " TotalSpts = " + this.state.dataSource.totalSpots);
                 var count = 0;
                 for (var j = 0; j < this.state.sensors.length; j++){
@@ -66,9 +71,31 @@ class Main extends Component{
     }
 
     saveGarage  = (garageLet) => {
+        var temp = "1";
+        for (var i = 0; i < this.state.garages.length; i++){
+            if (this.state.garages[i].name === garageLet && this.state.garages[i].enabled == "0"){
+                temp = "0";
+                break;
+            }
+        }
+        if (temp === "0"){
+            AsyncStorage.setItem('enabled', "0");
+        }else{
+            AsyncStorage.setItem('enabled', "1");
+        }
+        
         AsyncStorage.setItem('garageName', garageLet);
         return;
     }
+
+    // for (var i = 0; i < this.state.dataSource.length; i++){
+    //     if (this.state.dataSource[i].garage === this.state.garageLet){
+    //         this.setState({
+    //             empty: false
+    //         })
+    //         break;
+    //     }
+    // }
 
     render(){
         return(
